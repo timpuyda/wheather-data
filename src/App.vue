@@ -2,16 +2,14 @@
   <div id="app">
     <div class="container">
       <div class="row">
-        <h1>App</h1>
+        <h1>Wheather</h1>
 
         <div class="col-12" v-if="weatherData != null">
-          <!-- <nav> -->
             <div class="btn-toolbar">
             <div class=" btn-group d-flex justify-content-start " >
               <button v-for="(city, index) in cities" v-bind:key="index" v-on:click="changeIndex(index)" class="btn btn-info " v-bind:class="{ active: city.isActive }"> {{city.name}} </button>
             </div>
           </div>
-          <!-- </nav> -->
           <table class="table text-left mt-1" v-if="!loading">
             <thead class="thead-dark">
               <tr><th colspan="2" scope="col">{{cities[tabIndex].name}} </th>
