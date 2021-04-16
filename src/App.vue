@@ -60,16 +60,16 @@ export default {
         "isActive":false
       },
       ],
-      apiKey: 'c2dcf8ffb5cdc3f8977bfd2ae7ea4738',
-      apiUrl: 'https://api.openweathermap.org/data/2.5/weather',
+      apiUrl: process.env.VUE_APP_URL,
       weatherData:null,
       tabIndex: 0,
       loading: true,
     }
   },
   mounted(){
-    this.getWeather();
     
+    this.getWeather();
+
   },
    methods:{
     changeIndex(index){
@@ -81,8 +81,15 @@ export default {
 
     },
     getWeather(){
+      const options={
+        params:{
+          q:this.cities[this.tabIndex].name,
+          units: 'metric',
+          appid: process.env.VUE_APP_KEY
+        }
+      }
       this.$axios
-      .get(this.apiUrl+'?q='+this.cities[this.tabIndex].name+'&units=metric'+'&appid='+this.apiKey)
+      .get(this.apiUrl, options)
       .then(response => (this.weatherData=response.data))
       .catch(error => console.log(error));
       this.loading=false;
